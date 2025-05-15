@@ -58,4 +58,3 @@ The following items I plan to fix, improve, and/or add to this project in the fu
 * [ ] Handle multiple client connections using threading  
 * [ ] Add error handling and edge-case testing  
 * [ ] Write a code walkthrough video and demonstration
-
