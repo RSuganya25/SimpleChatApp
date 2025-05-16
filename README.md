@@ -10,7 +10,8 @@ A basic Python socket-based program demonstrating a simple client-server archite
 - Understand how socket communication works in Python  
 - Build and test a basic TCP client-server application  
 - Set up the development environment and write clean, working code  
-- Push code to GitHub and begin sprint progress  
+- Push code to GitHub and track sprint progress  
+- Implement server responses to specific client messages (`greet`, `exit`, and others)
 
 ---
 
@@ -25,7 +26,10 @@ A basic Python socket-based program demonstrating a simple client-server archite
 **Instructions for using the software:**
 
 1. After running both scripts, type a message in the client terminal  
-2. The server will receive the message and send a response  
+2. The server responds based on the message:  
+   - `greet` → returns greeting with current date and time (YYYY-MM-DD HH:MM:SS)  
+   - `exit` → sends goodbye message and closes the connection  
+   - any other message → replies with "I don't understand that command."  
 3. Repeat to send more messages or test different inputs  
 
 ---
@@ -46,6 +50,9 @@ I found these websites useful in developing this software:
 
 * [Python socket — Low-level networking interface](https://docs.python.org/3/library/socket.html)  
 * [Real Python – Working with Sockets](https://realpython.com/python-sockets/)  
+* [Socket Programming in Python – GeeksforGeeks](https://www.geeksforgeeks.org/socket-programming-python/)  
+* [Client-Server Architecture – Wikipedia](https://en.wikipedia.org/wiki/Client%E2%80%93server_model)  
+* [Difference between TCP and UDP – How-To Geek](https://www.howtogeek.com/66214/whats-the-difference-between-tcp-and-udp/)
 
 ---
 
@@ -53,8 +60,9 @@ I found these websites useful in developing this software:
 
 The following items I plan to fix, improve, and/or add to this project in the future:
 
-* [ ] Add support for different message types (greeting, time, math operations)  
+* [x] Respond to specific client messages: `greet` (returns current date & time), `exit` (closes connection), and default reply  
+* [ ] Add support for additional message types such as math operations  
 * [ ] Use JSON format for structured client-server messages  
 * [ ] Handle multiple client connections using threading  
 * [ ] Add error handling and edge-case testing  
-* [ ] Write a code walkthrough video and demonstration
+* [ ] Write a code walkthrough video and demonstration  
