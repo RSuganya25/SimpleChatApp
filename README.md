@@ -42,10 +42,13 @@ A Python socket-based program that demonstrates a simple yet expandable client-s
 
 ## Example Commands and Responses
 Input from Client: greet
+
 Server Response: {"status": "ok", "message": "Hello!", "time": "2025-05-19 18:40:12"}
 
 Input from Client: math 7 * (2 + 3)
+
 Server Response: {"status": "ok", "result": 35}
 
 Input from Client: exit
+
 Server Response: {"status": "ok", "message": "Goodbye!"}
