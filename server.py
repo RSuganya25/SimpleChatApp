@@ -1,5 +1,6 @@
 import socket
 import threading
+import json
 from datetime import datetime
 
 HOST = 'localhost'
@@ -10,34 +11,62 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((HOST, PORT))
 server.listen()
-print(f"Server is listening on {HOST}:{PORT}...")
+print(f"[LISTENING] Server is listening on {HOST}:{PORT}...")
 
 def handle_client(conn, addr):
     """Handle communication with a single client."""
     print(f"[CONNECTED] {addr}")
     while True:
         try:
-            data = conn.recv(1024).decode('utf-8')
-            if not data:
+            raw = conn.recv(1024).decode('utf-8')
+            if not raw:
                 break
 
-            print(f"[{addr}] Client says: {data}")
+            # Parse JSON request
+            try:
+                request = json.loads(raw)
+            except json.JSONDecodeError:
+                response = {"status": "error", "message": "Invalid JSON"}
+                conn.send(json.dumps(response).encode('utf-8'))
+                continue
 
-            # Respond based on client message
-            msg = data.lower().strip()
-            if msg == "greet":
-                response = "Hello! The current time is " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            elif msg == "exit":
-                response = "Goodbye!"
-                conn.send(response.encode('utf-8'))
+            msg_type = request.get("type", "").lower()
+            print(f"[{addr}] Request: {request}")
+
+            # Handle request types
+            if msg_type == "greet":
+                reply = {
+                    "status": "ok",
+                    "message": "Hello!",
+                    "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                }
+
+            elif msg_type == "math":
+                expr = request.get("expression", "")
+                try:
+                    # WARNING: eval can be dangerous — placeholder for safe eval
+                    result = eval(expr, {"__builtins__": {}})
+                    reply = {"status": "ok", "result": result}
+                except Exception as e:
+                    reply = {"status": "error", "message": str(e)}
+
+            elif msg_type == "exit":
+                reply = {"status": "ok", "message": "Goodbye!"}
+                conn.send(json.dumps(reply).encode('utf-8'))
                 break
+
             else:
-                response = "I don't understand that command."
+                reply = {"status": "error", "message": "Unknown command"}
 
-            conn.send(response.encode('utf-8'))
+            # TODO May 20: if msg_type == "data": load from file or database here
+
+            conn.send(json.dumps(reply).encode('utf-8'))
 
         except ConnectionResetError:
             # Client disconnected abruptly
+            break
+        except Exception as e:
+            print(f"[ERROR] {addr} - {e}")
             break
 
     conn.close()
@@ -48,3 +77,4 @@ while True:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client, args=(conn, addr), daemon=True)
     thread.start()
+    print(f"[ACTIVE CONNECTIONS] {threading.active_count()-1}")

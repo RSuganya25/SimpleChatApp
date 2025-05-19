@@ -4,65 +4,48 @@
 Python Socket Client-Server Chat App
 
 **Project Description**:  
-A basic Python socket-based program demonstrating a simple client-server architecture. The client sends text messages, and the server receives and responds to them. This foundational project introduces network communication concepts using TCP sockets.
+A Python socket-based program that demonstrates a simple yet expandable client-server architecture. The client sends structured JSON requests, and the server responds accordingly. This project introduces core networking concepts using TCP sockets while also exploring JSON, threading, and basic request handling.
 
 **Project Goals**:  
-- Understand how socket communication works in Python  
-- Build and test a basic TCP client-server application  
-- Set up the development environment and write clean, working code  
-- Push code to GitHub and track sprint progress  
-- Implement server responses to specific client messages (`greet`, `exit`, and others)
+- Understand socket communication in Python  
+- Build a TCP-based multi-client chat-style app  
+- Use structured JSON messages for clear communication  
+- Handle client disconnections gracefully and keep server alive  
+- Support multiple types of client requests (`greet`, `math`, `exit`)  
+- Maintain clean code and track features via GitHub  
+- Prepare for future enhancements like file/database interaction
 
 ---
 
 ## Instructions for Build and Use
 
-**Steps to build and/or run the software:**
+**Steps to build and run the software:**
 
 1. Clone this repository from GitHub  
-2. Open a terminal and run `server.py` to start the server  
-3. Open another terminal and run `client.py` to start the client  
+2. In one terminal, run `server.py` to start the server  
+3. In another terminal, run `client.py` to launch the client  
 
-**Instructions for using the software:**
+**Usage Instructions:**
 
-1. After running both scripts, type a message in the client terminal  
-2. The server responds based on the message:  
-   - `greet` → returns greeting with current date and time (YYYY-MM-DD HH:MM:SS)  
-   - `exit` → sends goodbye message and closes the connection  
-   - any other message → replies with "I don't understand that command."  
-3. Repeat to send more messages or test different inputs  
-
----
-
-## Development Environment 
-
-To recreate the development environment, you need the following software and/or libraries with the specified versions:
-
-* Python 3.10 or higher  
-* VS Code (recommended editor)  
-* Git (for version control and GitHub integration)
+1. After running both scripts, follow prompts in the client terminal  
+2. Enter a command from the supported types below:  
+   - `greet`  
+     - Returns a welcome message with the current server date/time  
+   - `math <expression>`  
+     - Evaluates the expression (e.g., `math 5 + 2 * 3`)  
+   - `exit`  
+     - Ends the session with a goodbye message  
+3. The server responds with JSON-formatted output for clarity  
+4. You can close the client and reopen it to test reconnections  
 
 ---
 
-## Useful Websites to Learn More
+## Example Commands and Responses
+Input from Client: greet
+Server Response: {"status": "ok", "message": "Hello!", "time": "2025-05-19 18:40:12"}
 
-I found these websites useful in developing this software:
+Input from Client: math 7 * (2 + 3)
+Server Response: {"status": "ok", "result": 35}
 
-* [Python socket — Low-level networking interface](https://docs.python.org/3/library/socket.html)  
-* [Real Python – Working with Sockets](https://realpython.com/python-sockets/)  
-* [Socket Programming in Python – GeeksforGeeks](https://www.geeksforgeeks.org/socket-programming-python/)  
-* [Client-Server Architecture – Wikipedia](https://en.wikipedia.org/wiki/Client%E2%80%93server_model)  
-* [Difference between TCP and UDP – How-To Geek](https://www.howtogeek.com/66214/whats-the-difference-between-tcp-and-udp/)
-
----
-
-## Future Work
-
-The following items I plan to fix, improve, and/or add to this project in the future:
-
-* [x] Respond to specific client messages: `greet` (returns current date & time), `exit` (closes connection), and default reply  
-* [ ] Add support for additional message types such as math operations  
-* [ ] Use JSON format for structured client-server messages  
-* [ ] Handle multiple client connections using threading  
-* [ ] Add error handling and edge-case testing  
-* [ ] Write a code walkthrough video and demonstration  
+Input from Client: exit
+Server Response: {"status": "ok", "message": "Goodbye!"}
