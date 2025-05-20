@@ -7,26 +7,18 @@ Python Socket Client-Server Chat App
 A Python socket-based program that demonstrates a simple yet expandable client-server architecture. The client sends structured JSON requests, and the server responds accordingly. This project introduces core networking concepts using TCP sockets while also exploring JSON, threading, and basic request handling.
 
 **Project Goals**:  
-•	Understand socket communication in Python
-
-•	Build a TCP-based multi-client chat-style app
-
-•	Use structured JSON messages for clear communication
-
-•	Handle client disconnections gracefully and keep server alive
-
-•	Support multiple types of client requests (greet, math, exit)
-
-•	Manage multiple clients concurrently using threads
-
-•	Enable clients to:
-   o	See how many clients are connected (list)
-   o	Send messages directly to other clients (send <target> <message>)
-   o	Receive broadcast messages when clients join or leave
-
-•	Maintain clean code and track features via GitHub
-
-•	Prepare for future enhancements like file/database interaction
+- Understand socket communication in Python
+- Build a TCP-based multi-client chat-style app
+- Use structured JSON messages for clear communication
+- Handle client disconnections gracefully and keep server alive
+- Support multiple types of client requests (greet, math, exit)
+- Manage multiple clients concurrently using threads
+- Enable clients to:
+  - See how many clients are connected (list)
+  - Send messages directly to other clients (send <target> <message>)
+  - Receive broadcast messages when clients join or leave
+- Maintain clean code and track features via GitHub
+- Prepare for future enhancements like file/database interaction
 
 ## Instructions for Build and Use
 
