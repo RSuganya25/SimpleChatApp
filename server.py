@@ -117,7 +117,6 @@ def handle_client(conn, addr):
     broadcast({"type": "info", "message": f"{addr_str} has left the chat."}, exclude=addr_str)
 
     conn.close()
-
 while True:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client, args=(conn, addr), daemon=True)
